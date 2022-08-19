@@ -16,6 +16,10 @@ const app_screct = "d1b94f11904d5aee13e5fb338b7423af";
 //   "59_FrPBeMRuL1sa_MsTVECBHOf5UDFi_Toar7PBxz5nzCVRfoLYY32MCA_VtbK4ww4OgF87IghUT9QHHaa9JM3bK496Ud6bjdjAknfIgJklCy6IIbLaojC4PRuiQMXaFHTUH6miL3ZZqfn8uyEyBCDcAGAXYZ";
 
 const tianqiAppkey = "9731d734cb7c690f408d7c6b36967d3b";
+// https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index
+const to_user_hxx = 'om-Vy6LZYbzca6xKghw6sBmyVi94'
+
+const to_user_qxx = 'om-Vy6LQJZd7xtNXmC1-z55386mY'
 
 const template_id = 'hNFu2m0lswcgaLm9fKBJbW47fZZwZSHVGnD6VXo4-h4'
 
@@ -169,25 +173,23 @@ const getToken = async () => {
       console.log("res", res.data);
 
       sendMessage(res.data.access_token);
+
+      sendMessage(res.data.access_token, to_user_hxx)
     })
     .catch((err) => {
       console.log("err", err);
     });
 };
 
-// https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index
-const to_user_hxx = 'om-Vy6LZYbzca6xKghw6sBmyVi94'
 
-const to_user_qxx = 'om-Vy6LQJZd7xtNXmC1-z55386mY'
-
-const sendMessage = async (token) => {
+const sendMessage = async (token, user = to_user_qxx) => {
   const data = await getCaihunData();
 
   request
     .post(
       `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${token}`,
       {
-        touser: to_user_qxx,
+        touser: user,
         template_id,
         url: "http://weixin.qq.com/download",
         topcolor: "#FF0000",
