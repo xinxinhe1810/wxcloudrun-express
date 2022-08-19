@@ -35,8 +35,9 @@ function sendmess (mess) {
 app.get("/", async (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
     const appid = req.headers['x-wx-from-appid'] || ''
+    console.log(req.body)
   const { ToUserName, FromUserName, MsgType, Content, CreateTime } = req.body
-console.log(req.body)
+
   sendmess({
     touser: FromUserName,
     msgtype: 'link',
@@ -60,8 +61,9 @@ app.post("/api/count", async (req, res) => {
     });
   }
    const appid = req.headers['x-wx-from-appid'] || ''
+   console.log(req.body)
   const { ToUserName, FromUserName, MsgType, Content, CreateTime } = req.body
-console.log(req.body)
+
    sendmess({
     touser: FromUserName,
     msgtype: 'link',
