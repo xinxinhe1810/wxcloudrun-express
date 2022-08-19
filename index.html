@@ -10,6 +10,8 @@
     <script src="//res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 
     <script src="//res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+
+    <script src="//web-9gikcbug35bad3a8-1304825656.tcloudbaseapp.com/sdk/1.4.0/cloud.js"></script>
     
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -155,58 +157,98 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
-wx.config({
-  debug: true, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
-  appId: 'wx3a426761d23d42b3', // 必填，公众号的唯一标识
-  // timestamp: new Date().getTime(), // 必填，生成签名的时间戳
-  timestamp:1660913439,
-  nonceStr: 'hxx&qxx', // 必填，生成签名的随机串
-  signature: 'f9ef54aea5d0d4ce5602425ba9f0c3448b2ec690',// 必填，签名
-  jsApiList: [
-    'chooseImage',
-    'previewImage',
-    'playVoice',
-    'pauseVoice',
-    'stopVoice',
-    'openLocation',
-    'getNetworkType',
-    'closeWindow',
-    'hideMenuItems',
-    'showMenuItems',
-    'showAllNonBaseMenuItem',
-    'hideAllNonBaseMenuItem',
-    'scanQRCode',
-    'menuItem:profile',
-    'menuItem:addContact',
-    'menuItem:share:appMessage',
-    'menuItem:share:timeline'
-  ] // 必填，需要使用的 JS 接口列表
-});
 
-wx.onMenuShareAppMessage({
-  title: '我们2', // 分享标题
-  desc: '我们23', // 分享描述
-  link: 'iqiaoxin.life', // 分享链接，该链接域名或路径必须与当前页面对应的公众号 JS 安全域名一致
-  imgUrl: 'https://7072-prod-1gnx0wndb7f0ef6d-1313395079.tcb.qcloud.la/WechatIMG2.png?sign=3f758b9d15b75c1513219a7317ffaa41&t=1660913642', // 分享图标
-  // type: 'link', // 分享类型,music、video或link，不填默认为link
-  // dataUrl: '', // 如果 type 是music或video，则要提供数据链接，默认为空
-  success: function () {
-    // 用户点击了分享后执行的回调函数
-  }
-});
+$.ajax('/message', {method: 'POST'})
 
-wx.onMenuShareTimeline({
-  title: '我们', // 分享标题
-  link: 'iqiaoxin.life', // 分享链接，该链接域名或路径必须与当前页面对应的公众号 JS 安全域名一致
-  imgUrl: 'https://7072-prod-1gnx0wndb7f0ef6d-1313395079.tcb.qcloud.la/WechatIMG1.jpeg?sign=a61b48ac758fe2368afb7befeffa438a&t=1660913287', // 分享图标
-  success: function () {
-  // 用户点击了分享后执行的回调函数
-  }
+// $.ajax('/api/count')
+
+var c1 = new cloud.Cloud({
+  // 必填，表示是未登录模式
+  identityless: true,
+  appid: 'wx3a426761d23d42b3',
+  // 资源方 AppID
+  resourceAppid: 'wx3a426761d23d42b3',
+  // 资源方环境 ID
+  resourceEnv: 'prod-1gnx0wndb7f0ef6d',
 })
 
-$.ajax('/message')
+// 跨账号调用，必须等待 init 完成
+// init 过程中，资源方小程序对应环境下的 cloudbase_auth 函数会被调用，并需返回协议字段（见下）来确认允许访问、访问时长以及可自定义安全规则
 
-$.ajax('/api/count')
+const init = async () => {
+  try {
+    const res = await c1.init()
+    console.log('init done', res)
+  } catch (error) {
+    console.log('init err', error)
+  }
+}
+const getS = async () => {
+  try {
+    
+    const res = await c1.getJSSDKSignature({
+      url: 'http://iqiaoxin.life'
+    })
+  
+    console.log(res)
+  
+    wx.config({
+    debug: true, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
+    appId: 'wx3a426761d23d42b3', // 必填，公众号的唯一标识
+    // timestamp: new Date().getTime(), // 必填，生成签名的时间戳
+    timestamp:1660913439,
+    nonceStr: 'hxx&qxx', // 必填，生成签名的随机串
+    signature: 'f9ef54aea5d0d4ce5602425ba9f0c3448b2ec690',// 必填，签名
+    jsApiList: [
+      'chooseImage',
+      'previewImage',
+      'playVoice',
+      'pauseVoice',
+      'stopVoice',
+      'openLocation',
+      'getNetworkType',
+      'closeWindow',
+      'hideMenuItems',
+      'showMenuItems',
+      'showAllNonBaseMenuItem',
+      'hideAllNonBaseMenuItem',
+      'scanQRCode',
+      'menuItem:profile',
+      'menuItem:addContact',
+      'menuItem:share:appMessage',
+      'menuItem:share:timeline'
+    ] // 必填，需要使用的 JS 接口列表
+  });
+  
+  wx.onMenuShareAppMessage({
+    title: '我们2', // 分享标题
+    desc: '我们23', // 分享描述
+    link: 'iqiaoxin.life', // 分享链接，该链接域名或路径必须与当前页面对应的公众号 JS 安全域名一致
+    imgUrl: 'https://7072-prod-1gnx0wndb7f0ef6d-1313395079.tcb.qcloud.la/WechatIMG2.png?sign=3f758b9d15b75c1513219a7317ffaa41&t=1660913642', // 分享图标
+    // type: 'link', // 分享类型,music、video或link，不填默认为link
+    // dataUrl: '', // 如果 type 是music或video，则要提供数据链接，默认为空
+    success: function () {
+      // 用户点击了分享后执行的回调函数
+    }
+  });
+  
+  wx.onMenuShareTimeline({
+    title: '我们', // 分享标题
+    link: 'iqiaoxin.life', // 分享链接，该链接域名或路径必须与当前页面对应的公众号 JS 安全域名一致
+    imgUrl: 'https://7072-prod-1gnx0wndb7f0ef6d-1313395079.tcb.qcloud.la/WechatIMG1.jpeg?sign=a61b48ac758fe2368afb7befeffa438a&t=1660913287', // 分享图标
+    success: function () {
+    // 用户点击了分享后执行的回调函数
+    }
+  })
+  } catch (error) {
+    console.log('error', error)
+  }
+}
+init().then(() => {
+  getS()
+})
+
+console.log(c1)
 </script>
 
 </html>
