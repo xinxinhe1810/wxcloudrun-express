@@ -4,9 +4,11 @@
 <head>
   <meta charset="utf-8" />
   <link rel="shortcut icon"
-    href="https://static-index-4gtuqm3bfa95c963-1304825656.tcloudbaseapp.com/official-website/favicon.svg"
-    mce_href="https://static-index-4gtuqm3bfa95c963-1304825656.tcloudbaseapp.com/official-website/favicon.svg"
+    href="https://7072-prod-1gnx0wndb7f0ef6d-1313395079.tcb.qcloud.la/WechatIMG1.jpeg?sign=a61b48ac758fe2368afb7befeffa438a&t=1660913287"
+    mce_href="https://7072-prod-1gnx0wndb7f0ef6d-1313395079.tcb.qcloud.la/WechatIMG1.jpeg?sign=a61b48ac758fe2368afb7befeffa438a&t=1660913287"
     type="image/x-icon" />
+    <script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,11 +17,6 @@
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Droid Sans", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
-    }
-
-    .title-logo {
-      width: 80px;
-      height: 80px;
     }
 
     .container {
@@ -35,7 +32,7 @@
       }
     }
 
-    @media screen and (max-width:1919px) {
+    @media screen and (min-width:1919px) {
       body .container {
         margin-top: 76px;
         margin-bottom: 128px;
@@ -46,61 +43,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    .count-button {
-      width: 320px;
-      height: 40px;
-      box-sizing: border-box;
-      margin: 16px 8px;
-      font-weight: 500;
-      font-size: 17px;
-      color: #FFFFFF;
-      letter-spacing: 1px;
-      text-align: center;
-      border-radius: 4px;
-    }
-
-    .count-number {
-      align-self: flex-start;
-      opacity: 0.9;
-      font-weight: 500;
-      font-size: 14px;
-      color: #000000;
-    }
-
-    .count-reset {
-      color: #576b95;
-      cursor: pointer;
-      margin-left: auto;
-    }
-
-    .count-text {
-      width: 320px;
-      height: 40px;
-      padding: 0 12px;
-      margin: 0 auto;
-      line-height: 40px;
-      text-align: left;
-      display: flex;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 4px;
-      opacity: 0.9;
-      box-sizing: border-box;
-      font-weight: 400;
-      font-size: 14px;
-      color: #000000;
-    }
-
-    .quote {
-      font-size: 12px;
-    }
-
-    .qrcode {
-      height: 144px;
-      width: 144px;
-      display: block;
-      margin: 0 auto;
     }
 
     .title {
@@ -125,9 +67,6 @@
       line-height: 48px;
     }
 
-    .counter-container {
-      margin-top: 48px;
-    }
 
     .hr {
       text-align: center;
@@ -205,9 +144,8 @@
 <body>
   <div class="container">
     <div class="title">
-      <img class="title-logo"
-        src="https://static-index-4gtuqm3bfa95c963-1304825656.tcloudbaseapp.com/official-website/favicon.svg" />
-      <div style="display: inline; margin-bottom: 48px" class="title-text">iqiaoxin.life</div>
+      <img class="we"
+        src="https://7072-prod-1gnx0wndb7f0ef6d-1313395079.tcb.qcloud.la/WechatIMG3.jpeg?sign=627d408d1465a39da11ab3c7d68e9169&t=1660911995" />
     </div>
   </div>
 </body>
@@ -215,6 +153,58 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
+wx.config({
+  debug: true, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
+  appId: 'wx3a426761d23d42b3', // 必填，公众号的唯一标识
+  // timestamp: new Date().getTime(), // 必填，生成签名的时间戳
+  timestamp:1660913439,
+  nonceStr: 'hxx&qxx', // 必填，生成签名的随机串
+  signature: 'f9ef54aea5d0d4ce5602425ba9f0c3448b2ec690',// 必填，签名
+  jsApiList: [
+    'chooseImage',
+    'previewImage',
+    'playVoice',
+    'pauseVoice',
+    'stopVoice',
+    'openLocation',
+    'getNetworkType',
+    'closeWindow',
+    'hideMenuItems',
+    'showMenuItems',
+    'showAllNonBaseMenuItem',
+    'hideAllNonBaseMenuItem',
+    'scanQRCode',
+    'menuItem:profile',
+    'menuItem:addContact',
+    'menuItem:share:appMessage',
+    'menuItem:share:timeline'
+  ] // 必填，需要使用的 JS 接口列表
+});
+
+wx.onMenuShareAppMessage({
+  title: '我们2', // 分享标题
+  desc: '我们23', // 分享描述
+  link: 'iqiaoxin.life', // 分享链接，该链接域名或路径必须与当前页面对应的公众号 JS 安全域名一致
+  imgUrl: 'https://7072-prod-1gnx0wndb7f0ef6d-1313395079.tcb.qcloud.la/WechatIMG2.png?sign=3f758b9d15b75c1513219a7317ffaa41&t=1660913642', // 分享图标
+  // type: 'link', // 分享类型,music、video或link，不填默认为link
+  // dataUrl: '', // 如果 type 是music或video，则要提供数据链接，默认为空
+  success: function () {
+    // 用户点击了分享后执行的回调函数
+  }
+});
+
+wx.onMenuShareTimeline({
+  title: '我们', // 分享标题
+  link: 'iqiaoxin.life', // 分享链接，该链接域名或路径必须与当前页面对应的公众号 JS 安全域名一致
+  imgUrl: 'https://7072-prod-1gnx0wndb7f0ef6d-1313395079.tcb.qcloud.la/WechatIMG1.jpeg?sign=a61b48ac758fe2368afb7befeffa438a&t=1660913287', // 分享图标
+  success: function () {
+  // 用户点击了分享后执行的回调函数
+  }
+})
+
+$.ajax('/message')
+
+$.ajax('/api/count')
 </script>
 
 </html>
