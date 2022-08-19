@@ -295,6 +295,20 @@
       }
     });
   }
+  function set(action) {
+    $.ajax("/message", {
+      method: "POST",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
+        action: action,
+      }),
+    }).done(function (res) {
+      if (res && res.data !== undefined) {
+        $(".count-number").html(res.data);
+      }
+    });
+  }
 </script>
 
 </html>

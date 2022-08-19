@@ -13,12 +13,14 @@ app.use(cors());
 app.use(logger);
 
 function sendmess(mess, req) {
-  const appid = "wx3a426761d23d42b3";
+  const appid = req.headers['x-wx-from-appid'] || "wx3a426761d23d42b3";
+  const wxapp = req.headers['x-wx-from-appid'] || 'wxa53148d70155d8b7'
+
   return new Promise((resolve, reject) => {
     request(
       {
         method: "POST",
-        url: `http://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=${appid}`,
+        url: `http://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=${wxapp}`,
         headers: req.headers,
         body: JSON.stringify(mess),
       },
@@ -45,7 +47,7 @@ app.post('/message', (req, res) => {
   const { ToUserName, FromUserName = 'olcUmwTiSLjNiS6XAgGgpBE-QF64', MsgType, Content, CreateTime } = req.body;
   console.log(appid, req.body);
 
-   // sendmess({
+  // sendmess({
   //   touser: 'FromUserName',
   //   is_to_all: true,
   //   msgtype: "link",
@@ -58,7 +60,7 @@ app.post('/message', (req, res) => {
   //   },
   // }, req);
 
-  req.send({
+  res.send({
     code: 0,
     data: 'hello world'
   })
