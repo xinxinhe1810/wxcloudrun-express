@@ -105,6 +105,10 @@ app.get("/api/wx_openid", async (req, res) => {
   if (req.headers["x-wx-source"]) {
     res.send(req.headers["x-wx-openid"]);
   }
+  res.send({
+    code: -1,
+    data: null
+  })
 });
 
 const port = process.env.PORT || 80;
