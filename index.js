@@ -37,22 +37,31 @@ function sendmess(mess) {
 // 首页
 app.get("/", async (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
-  const appid = req.headers["x-wx-from-appid"] || "";
-  console.log(appid, req.body);
-  const { ToUserName, FromUserName, MsgType, Content, CreateTime } = req.body;
-
-  sendmess({
-    touser: FromUserName,
-    msgtype: "link",
-    link: {
-      title: "Relax｜今日推荐音乐",
-      description: "每日推荐一个好听的音乐，感谢收听～",
-      thumb_url:
-        "https://y.qq.com/music/photo_new/T002R300x300M000004NEn9X0y2W3u_1.jpg?max_age=2592000", // 支持JPG、PNG格式，较好的效果为大图360*200，小图200*200
-      url: "https://c.y.qq.com/base/fcgi-bin/u?__=0zVuus4U",
-    },
-  });
 });
+
+app.post('/message', (req, res) => {
+  const appid = req.headers["x-wx-from-appid"] || "";
+  const { ToUserName, FromUserName = 'olcUmwTiSLjNiS6XAgGgpBE-QF64', MsgType, Content, CreateTime } = req.body;
+  console.log(appid, req.body);
+
+   // sendmess({
+  //   touser: 'FromUserName',
+  //   is_to_all: true,
+  //   msgtype: "link",
+  //   link: {
+  //     title: "Relax｜今日推荐音乐",
+  //     description: "每日推荐一个好听的音乐，感谢收听～",
+  //     thumb_url:
+  //       "https://y.qq.com/music/photo_new/T002R300x300M000004NEn9X0y2W3u_1.jpg?max_age=2592000", // 支持JPG、PNG格式，较好的效果为大图360*200，小图200*200
+  //     url: "https://c.y.qq.com/base/fcgi-bin/u?__=0zVuus4U",
+  //   },
+  // });
+
+  req.send({
+    code: 0,
+    data: 'hello world'
+  })
+})
 
 // 更新计数
 app.post("/api/count", async (req, res) => {
@@ -64,22 +73,7 @@ app.post("/api/count", async (req, res) => {
       truncate: true,
     });
   }
-  const appid = req.headers["x-wx-from-appid"] || "";
-  console.log(appid, req.body);
-  const { ToUserName, FromUserName, MsgType, Content, CreateTime } = req.body;
 
-  sendmess({
-    touser: FromUserName,
-    is_to_all: true,
-    msgtype: "link",
-    link: {
-      title: "Relax｜今日推荐音乐",
-      description: "每日推荐一个好听的音乐，感谢收听～",
-      thumb_url:
-        "https://y.qq.com/music/photo_new/T002R300x300M000004NEn9X0y2W3u_1.jpg?max_age=2592000", // 支持JPG、PNG格式，较好的效果为大图360*200，小图200*200
-      url: "https://c.y.qq.com/base/fcgi-bin/u?__=0zVuus4U",
-    },
-  });
   res.send({
     code: 0,
     data: await Counter.count(),
