@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const { init: initDB, Counter } = require("./db");
 const request = require("request");
 const logger = morgan("tiny");
+const cloud = require('./cloud')
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
