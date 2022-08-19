@@ -43,7 +43,7 @@ app.get("/", async (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.post('/message', (req, res) => {
+app.get("/send", async (req, res) => {
   const appid = req.headers["x-wx-from-appid"] || "";
   const { ToUserName, FromUserName = 'olcUmwTiSLjNiS6XAgGgpBE-QF64', MsgType, Content, CreateTime } = req.body;
   console.log(appid, req.body);
@@ -60,10 +60,17 @@ app.post('/message', (req, res) => {
       url: "https://c.y.qq.com/base/fcgi-bin/u?__=0zVuus4U",
     },
   }, req);
+});
+
+
+app.post('/message', (req, res) => {
+  const { MsgType, Content } = req.body;
+
+  console.log('= message =', MsgType, Content)
 
   res.send({
     code: 0,
-    data: 'hello world'
+    data: 'hello message'
   })
 })
 
@@ -100,10 +107,10 @@ app.get("/api/wx_openid", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 8000;
 
 async function bootstrap() {
-  await initDB();
+  // await initDB();
   app.listen(port, () => {
     console.log("启动成功", port);
   });
