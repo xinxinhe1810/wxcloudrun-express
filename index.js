@@ -34,6 +34,9 @@ function sendmess (mess) {
 // 首页
 app.get("/", async (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
+    const appid = req.headers['x-wx-from-appid'] || ''
+  const { ToUserName, FromUserName, MsgType, Content, CreateTime } = req.body
+console.log(req.body)
   sendmess({
     touser: FromUserName,
     msgtype: 'link',
@@ -56,6 +59,9 @@ app.post("/api/count", async (req, res) => {
       truncate: true,
     });
   }
+   const appid = req.headers['x-wx-from-appid'] || ''
+  const { ToUserName, FromUserName, MsgType, Content, CreateTime } = req.body
+console.log(req.body)
    sendmess({
     touser: FromUserName,
     msgtype: 'link',
