@@ -1,6 +1,5 @@
 const cloud = require('wx-server-sdk')
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
-console.log('cloud', cloud)
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
@@ -12,6 +11,8 @@ exports.main = async (event, context) => {
   console.log(wxContext.FROM_OPENID)
   // 跨账号调用、且满足 unionid 获取条件时，由此拿到同主体下的用户 UnionID
   console.log(wxContext.FROM_UNIONID)
+
+  console.log('cloud', cloud, wxContext, event)
 
   return {
     errCode: 0,

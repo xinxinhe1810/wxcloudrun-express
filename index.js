@@ -94,6 +94,10 @@ app.get("/api/wx_openid", async (req, res) => {
   })
 });
 
+app.get('/context', (req, res) => {
+  res.send(cloud.main)
+})
+
 const port = process.env.PORT || 80;
 
 async function bootstrap() {
