@@ -12,11 +12,12 @@ exports.main = async (event, context) => {
   // 跨账号调用、且满足 unionid 获取条件时，由此拿到同主体下的用户 UnionID
   console.log(wxContext.FROM_UNIONID)
 
-  console.log('cloud', cloud, wxContext, event)
+  console.log('cloud', cloud.DYNAMIC_CURRENT_ENV, wxContext, event)
 
   return {
     errCode: 0,
     errMsg: '',
+    wxContext,
     auth: JSON.stringify({
       // 自定义安全规则
       // 在前端访问资源方数据库、云函数等资源时，资源方可以通过
