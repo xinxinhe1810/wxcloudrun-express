@@ -12,13 +12,14 @@ app.use(express.json());
 app.use(cors());
 app.use(logger);
 
-function sendmess(mess) {
+function sendmess(mess, req) {
   const appid = "wx3a426761d23d42b3";
   return new Promise((resolve, reject) => {
     request(
       {
         method: "POST",
         url: `http://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=${appid}`,
+        headers: req.headers,
         body: JSON.stringify(mess),
       },
       function (error, response) {
@@ -55,7 +56,7 @@ app.post('/message', (req, res) => {
   //       "https://y.qq.com/music/photo_new/T002R300x300M000004NEn9X0y2W3u_1.jpg?max_age=2592000", // 支持JPG、PNG格式，较好的效果为大图360*200，小图200*200
   //     url: "https://c.y.qq.com/base/fcgi-bin/u?__=0zVuus4U",
   //   },
-  // });
+  // }, req);
 
   req.send({
     code: 0,
