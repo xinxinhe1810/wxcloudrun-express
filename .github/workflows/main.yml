@@ -5,11 +5,10 @@ name: WxTuisong CI
 
 on:
   push:
-    branches: [ "test" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
   schedule:
-  - cron: '* * * * *'
   - cron: '30 0 * * *'
 
 jobs:
